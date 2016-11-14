@@ -56,11 +56,7 @@ if ! [ `brew tap | grep buo/cask-upgrade` ]; then
   brew tap buo/cask-upgrade
 fi
 
-if ! [ `brew list | grep brew-cask` ]; then
-  brew install --HEAD brew-cask
-fi
-
-exit 0
+#exit 0
 
 ################################################################################
 
@@ -102,20 +98,19 @@ npm install -g vtop
 npm install -g yarn
 
 # Fish shell
-brew cask install fish
-# fish
-# fisher
+brew install fish
 
 brew install ack
 brew install brew-cask-completion
 brew install git
 brew install git-extras
+brew install libdvdcss
 brew install openssl
+brew install pv
+brew install python
 brew install rsync
 brew install sqlite
 brew install wget
-brew install pv
-brew install python
 
 # Vagrant and Ansible
 brew cask install virtualbox
@@ -156,11 +151,13 @@ brew cask install gas-mask
 brew cask install google-chrome
 brew cask install google-chrome-canary
 brew cask install google-photos-backup
-brew cask install handbreak
+brew cask install handbrake
 brew cask install hex-fiend
-brew cask install hostbuddy
+# brew cask install hostbuddy # using gas-mask
 brew cask install hyper
 brew cask install integrity
+brew cask install istat-menus
+brew cask install iterm2
 brew cask install launchcontrol
 brew cask install limechat
 brew cask install liteicon
