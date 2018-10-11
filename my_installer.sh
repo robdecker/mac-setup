@@ -33,15 +33,10 @@ ln -s ~/.composer/vendor/bin/drush /usr/local/bin/drush
 
 # Terminus (Pantheon)
 echo >&2 "Installing Terminus..."
+mkdir $HOME/.drush/terminus
 cd $HOME/.drush/terminus
 composer require pantheon-systems/terminus
 cd $CURRENTPATH;
-
-# Drush SQL Sync Pipe
-# See https://drupal.org/project/drush_sql_sync_pipe
-echo >&2 "Installing Drush sql_sync_pipe..."
-drush dl drush_sql_sync_pipe --destination=$HOME/.drush
-drush cc drush
 
 # NPM and related
 ## Update: $ npm list -g --depth 0
@@ -68,6 +63,7 @@ pip install ansible
 
 # Ruby
 echo >&2 "Installing RVM & a Ruby..."
+curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 curl -sSL https://get.rvm.io | bash -s stable -- --ignore-dotfiles
 # rvm install <ruby version>
 rvm install 2.5.1
