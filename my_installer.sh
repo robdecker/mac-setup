@@ -33,7 +33,7 @@ ln -s ~/.composer/vendor/bin/drush /usr/local/bin/drush
 
 # Terminus (Pantheon)
 echo >&2 "Installing Terminus..."
-mkdir $HOME/.drush/terminus
+mkdir -p $HOME/.drush/terminus
 cd $HOME/.drush/terminus
 composer require pantheon-systems/terminus
 cd $CURRENTPATH;
@@ -64,6 +64,5 @@ pip install ansible
 # Ruby
 echo >&2 "Installing RVM & a Ruby..."
 curl -sSL https://rvm.io/mpapis.asc | gpg --import -
-curl -sSL https://get.rvm.io | bash -s stable -- --ignore-dotfiles
+curl -sSL https://get.rvm.io | bash -s stable --ruby
 # rvm install <ruby version>
-rvm install 2.5.1
