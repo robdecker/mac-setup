@@ -21,7 +21,7 @@ fi
 
 # Homebrew taps, formulae, casks, mac app store
 echo >&2 "Installing Homebrew taps, formulae, casks, mac app store apps..."
-brew bundle
+brew bundle --verbose
 
 # Install Homebrew casks into global applications directory.
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
