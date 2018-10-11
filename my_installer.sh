@@ -19,12 +19,12 @@ if ! command_exists brew; then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+# Install Homebrew casks into global applications directory.
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
 # Homebrew taps, formulae, casks, mac app store
 echo >&2 "Installing Homebrew taps, formulae, casks, mac app store apps..."
 brew bundle --verbose
-
-# Install Homebrew casks into global applications directory.
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Drush
 echo >&2 "Installing Drush..."
