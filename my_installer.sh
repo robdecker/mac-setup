@@ -15,44 +15,37 @@ fi
 
 # Install homebrew
 if ! command_exists brew; then
+  echo >&2 "Installing Homebrew..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
+
+# Homebrew taps, formulae, casks, mac app store
+echo >&2 "Installing Homebrew taps, formulae, casks, mac app store apps..."
+brew bundle
 
 # Install Homebrew casks into global applications directory.
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-# Composer - don't use Homebrew version due to PHP dependencies
-EXPECTED_SIGNATURE="$(curl -s https://composer.github.io/installer.sig)"
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-ACTUAL_SIGNATURE="$(php -r "echo hash_file('SHA384', 'composer-setup.php');")"
-if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
-then
-    >&2 echo 'ERROR: Invalid installer signature'
-    rm composer-setup.php
-    exit 1
-fi
-php composer-setup.php --quiet
-rm composer-setup.php
-
 # Drush
+echo >&2 "Installing Drush..."
 composer global require drush/drush
 ln -s ~/.composer/vendor/bin/drush /usr/local/bin/drush
 
 # Terminus (Pantheon)
+echo >&2 "Installing Terminus..."
 cd $HOME/.drush/terminus
 composer require pantheon-systems/terminus
 cd $CURRENTPATH;
 
 # Drush SQL Sync Pipe
 # See https://drupal.org/project/drush_sql_sync_pipe
+echo >&2 "Installing Drush sql_sync_pipe..."
 drush dl drush_sql_sync_pipe --destination=$HOME/.drush
 drush cc drush
 
-# Homebrew taps, formulae, casks, mac app store
-brew bundle
-
 # NPM and related
 ## Update: $ npm list -g --depth 0
+echo >&2 "Installing global NPM packages..."
 npm install -g bower
 npm install -g caniuse-cmd
 npm install -g create-react-app
@@ -70,9 +63,11 @@ npm install -g yo
 
 # Ansible
 ## https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#latest-releases-via-pip
+echo >&2 "Installing Ansible..."
 pip install ansible
 
 # Ruby
+echo >&2 "Installing RVM & a Ruby..."
 curl -sSL https://get.rvm.io | bash -s stable -- --ignore-dotfiles
 # rvm install <ruby version>
 rvm install 2.5.1
